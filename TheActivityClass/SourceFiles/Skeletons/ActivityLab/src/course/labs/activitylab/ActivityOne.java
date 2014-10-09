@@ -53,6 +53,9 @@ public class ActivityOne extends Activity {
 		// Hint: Access the TextView by calling Activity's findViewById()
 		// textView1 = (TextView) findViewById(R.id.textView1);
         mTvCreate=( TextView) findViewById(R.id.create);
+        mTvRestart=(TextView) findViewById(R.id.restart);
+        mTvStart=(TextView) findViewById(R.id.start);
+        mTvResume=(TextView) findViewById(R.id.resume);
 
 		Button launchActivityTwoButton = (Button) findViewById(R.id.bLaunchActivityTwo);
 		launchActivityTwoButton.setOnClickListener(new OnClickListener() {

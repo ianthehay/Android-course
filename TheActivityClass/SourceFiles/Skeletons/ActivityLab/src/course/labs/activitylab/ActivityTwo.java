@@ -29,13 +29,21 @@ public class ActivityTwo extends Activity {
 	
 	// You will need to increment these variables' values when their
 	// corresponding lifecycle methods get called.
-	
+    private int mCreate;
+    private int mRestart;
+    private int mStart;
+    private int mResume;
 
 	
 	
 	// TODO: Create variables for each of the TextViews
 	// named  mTvCreate, mTvRestart, mTvStart, mTvResume.
 	// for displaying the current count of each counter variable
+
+    private TextView mTvCreate;
+    private TextView mTvRestart;
+    private TextView mTvStart;
+    private TextView mTvResume;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +54,12 @@ public class ActivityTwo extends Activity {
 		// Hint: Access the TextView by calling Activity's findViewById()
 		// textView1 = (TextView) findViewById(R.id.textView1);
 
+        mTvCreate=( TextView) findViewById(R.id.create);
+        mTvRestart=(TextView) findViewById(R.id.restart);
+        mTvStart=(TextView) findViewById(R.id.start);
+        mTvResume=(TextView) findViewById(R.id.resume);
 
-		
-		
-		
-		
+
 		Button closeButton = (Button) findViewById(R.id.bClose); 
 		closeButton.setOnClickListener(new OnClickListener() {
 
@@ -61,7 +70,8 @@ public class ActivityTwo extends Activity {
 				// This function closes Activity Two
 				// Hint: use Context's finish() method
 
-				
+				finish();
+
 			
 			}
 		});
@@ -72,7 +82,10 @@ public class ActivityTwo extends Activity {
 			// TODO:
 			// Restore value of counters from saved state
 			// Only need 4 lines of code, one for every count variable
-
+            mCreate=savedInstanceState.getInt("Create");
+            mStart=savedInstanceState.getInt("Start");
+            mResume=savedInstanceState.getInt("Resume");
+            mRestart=savedInstanceState.getInt("Restart");
 
 			
 			
@@ -85,7 +98,9 @@ public class ActivityTwo extends Activity {
 
 		// TODO:
 		// Update the appropriate count variable
+        mCreate +=1;
 		// Update the user interface via the displayCounts() method
+        displayCounts();
 
 
 		
@@ -103,8 +118,9 @@ public class ActivityTwo extends Activity {
 
 		// TODO:
 		// Update the appropriate count variable
+        mStart+=1;
 		// Update the user interface
-
+        displayCounts();
 
 		
 		
@@ -119,7 +135,9 @@ public class ActivityTwo extends Activity {
 
 		// TODO:
 		// Update the appropriate count variable
+        mResume+=1;
 		// Update the user interface
+        displayCounts();
 
 
 	
@@ -150,8 +168,9 @@ public class ActivityTwo extends Activity {
 
 		// TODO:
 		// Update the appropriate count variable
+        mRestart+=1;
 		// Update the user interface
-
+        displayCounts();
 
 	
 	
@@ -171,12 +190,11 @@ public class ActivityTwo extends Activity {
 		// TODO:
 		// Save counter state information with a collection of key-value pairs
 		// 4 lines of code, one for every count variable
+        savedInstanceState.putInt("Create",mCreate);
+        savedInstanceState.putInt("Start",mStart);
+        savedInstanceState.putInt("Resume",mResume);
+        savedInstanceState.putInt("Restart",mRestart);
 
-
-
-		
-		
-		
 		
 	}
 
