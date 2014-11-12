@@ -205,7 +205,15 @@ public class MainActivity extends Activity implements SelectionListener {
 		// Unregister the BroadcastReceiver if it has been registered
         // Note: To work around a Robotium issue - check that the BroadcastReceiver
         // is not null before you try to unregister it
-        unregisterReceiver(mRefreshReceiver);
+        if (mRefreshReceiver != null) {
+            try{
+
+            unregisterReceiver(mRefreshReceiver);}
+            catch (IllegalArgumentException e){
+                
+            }
+        }
+
 
 		
 		
