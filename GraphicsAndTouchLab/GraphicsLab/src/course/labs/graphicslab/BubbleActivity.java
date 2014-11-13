@@ -142,13 +142,20 @@ public class BubbleActivity extends Activity {
 				// You can get all Views in mFrame one at a time
 				// using the ViewGroup.getChildAt() method
 
+                for(int i = 0; i < mFrame.getChildCount(); i++) {
+                    BubbleView viewby = (BubbleView) mFrame.getChildAt(i);
+                    if(viewby.intersects(event1.getRawX(),event1.getRawY()) ){
+                        viewby.deflect(velocityX, velocityY);
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
 
-				
-				
-				
-				
-				
-				return true;
+                }
+
+
+
 			}
 
 			// If a single tap intersects a BubbleView, then pop the BubbleView
@@ -163,16 +170,21 @@ public class BubbleActivity extends Activity {
 				// You can get all Views in mFrame using the
 				// ViewGroup.getChildCount() method
 
+                for(int i = 0; i < mFrame.getChildCount(); i++) {
+                    BubbleView viewby = (BubbleView) mFrame.getChildAt(i);
+                    if(viewby.intersects(event.getRawX(),event.getRawY()) ){
+                        viewby.stopMovement(true);
+                        return true;
+                    }
 
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
+                }
+
+
+				BubbleView newby = new BubbleView(mFrame.getContext(), event.getRawX(), event.getRawY());
+				mFrame.addView(newby);
+                newby.startMovement();
+
 				
 				
 				
@@ -186,13 +198,9 @@ public class BubbleActivity extends Activity {
 
 		// TODO - Delegate the touch to the gestureDetector
 
-		
 
-		
-		
-		
-		
-		return true || false;
+
+        return mGestureDetector.onTouchEvent(event);
 		
 	}
 
@@ -200,7 +208,7 @@ public class BubbleActivity extends Activity {
 	protected void onPause() {
 
 		// TODO - Release all SoundPool resources
-
+        mSoundPool.release();
 
 
 		
@@ -258,7 +266,8 @@ public class BubbleActivity extends Activity {
 			if (speedMode == RANDOM) {
 
 				// TODO - set rotation in range [1..3]
-
+                mDRotate =r.nextInt(2) + 1;
+                mRotate = (mRotate + mDRotate)% 360;
 				
 			} else {
 				mDRotate = 0;
@@ -289,8 +298,12 @@ public class BubbleActivity extends Activity {
 				// Limit speed in the x and y direction to [-3..3] pixels per movement.
 
 
-				
-				
+
+                long lower_lim = -3L;
+                long upper_lim = 3L;
+
+                mDx = lower_lim+((r.nextFloat()*(upper_lim-lower_lim)));
+                mDy = lower_lim+((r.nextFloat()*(upper_lim-lower_lim)));
 				
 				
 				
@@ -306,13 +319,13 @@ public class BubbleActivity extends Activity {
 			} else {
 
 				// TODO - set scaled bitmap size in range [1..3] * BITMAP_SIZE
-
+                mScaledBitmapWidth= (r.nextInt(2) + 1) *BITMAP_SIZE;
 
 				
 			}
 
 			// TODO - create the scaled bitmap using size set above
-
+            mScaledBitmap = Bitmap.createScaledBitmap(mBitmap,mScaledBitmapWidth,mScaledBitmapWidth,true);
 
 		}
 
